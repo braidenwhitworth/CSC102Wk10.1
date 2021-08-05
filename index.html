@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<!--
+Author: Braiden Whitworth
+Email: brawhitw@uat.edu
+Class: CSC102
+Purpose: Week 9 assignment. Playing a sound through a button on the page.
+-->
+<html>
+  <head>
+    <link rel="stylesheet" href="style.css" />
+    <title>UAT Space Program</title>
+    <script src="code.js"></script>
+    <script src="class.js"></script>
+    <script src="dataLoader.js"></script>
+    <script>
+      var theTime = new Date();
+      var tempTime = new Date();
+      var time_interval = 5000;
+      var last_interation = 0;
+      var running = true;
+      var index = 0;
+      var timer;
+
+      var data = getData();
+
+      function updateDisplay() {
+        theTime = new Date();
+        var timeRead = data[index].time_seconds;
+
+        if (timeRead >= 10) {
+          document.getElementById("data").rows["seconds"].innerHTML = dataRow(
+            "Time elapsed",
+            data[index].time_seconds,
+            "seconds"
+          );
+          document.getElementById("data").rows["latitude"].innerHTML = dataRow(
+            "Latitude",
+            data[index].latitude,
+            " "
+          );
+          document.getElementById("data").rows["longitude"].innerHTML = dataRow(
+            "longitude",
+            data[index].longitude,
+            " "
+          );
+          document.getElementById("data").rows[
+            "gpsSensor_alt"
+          ].innerHTML = dataRow("GPS Altitude", data[index].gps_altitude, " ");
+          document.getElementById("data").rows[
+            "bmpSensor_alt"
+          ].innerHTML = dataRow(
+            "BMP Sensor Altitude",
+            data[index].bmpSensor_altitude,
+            " "
+          );
+          document.getElementById("data").rows[
+            "bmpSensor_pres"
+          ].innerHTML = dataRow(
+            "BMP Sensor Pressure",
+            data[index].bmpSensor_pressure,
+            " "
+          );
+          document.getElementById("data").rows[
+            "bmpSensor_temp"
+          ].innerHTML = dataRow(
+            "BMP Sensor Temperature",
+            data[index].bmpSensor_temp,
+            " "
+          );
+          document.getElementById("data").rows[
+            "digSensor_temp"
+          ].innerHTML = dataRow(
+            "Digital Sensor Temperature",
+            data[index].digSensor_temp,
+            " "
+          );
+          document.getElementById("data").rows[
+            "cssSensor_ecO2"
+          ].innerHTML = dataRow(
+            "CSS Sensor Temperature",
+            data[index].cssSensor_ecO2,
+            " "
+          );
+          document.getElementById("data").rows[
+            "cssSensor_TVOC"
+          ].innerHTML = dataRow(
+            "CSS Sensor eC02",
+            data[index].cssSensor_TVOC,
+            " "
+          );
+          document.getElementById("data").rows["UV"].innerHTML = dataRow(
+            "UV",
+            data[index].UV,
+            " "
+          );
+          document.getElementById("data").rows["accelX"].innerHTML = dataRow(
+            "Accel X",
+            data[index].accelX,
+            " "
+          );
+          document.getElementById("data").rows["accelY"].innerHTML = dataRow(
+            "Accel Y",
+            data[index].accelY,
+            " "
+          );
+          document.getElementById("data").rows["accelZ"].innerHTML = dataRow(
+            "Accel Z",
+            data[index].accelZ,
+            " "
+          );
+          document.getElementById("data").rows["magneticX"].innerHTML = dataRow(
+            "Magnetic X",
+            data[index].magnetX,
+            " "
+          );
+          document.getElementById("data").rows["magneticY"].innerHTML = dataRow(
+            "Magnetic Y",
+            data[index].magnetY,
+            " "
+          );
+          document.getElementById("data").rows["magneticZ"].innerHTML = dataRow(
+            "Magnetic Z",
+            data[index].magnetZ,
+            " "
+          );
+          document.getElementById("data").rows["gyroX"].innerHTML = dataRow(
+            "Gyro X",
+            data[index].gyroX,
+            " "
+          );
+          document.getElementById("data").rows["gyroY"].innerHTML = dataRow(
+            "Gyro Y",
+            data[index].gyroY,
+            " "
+          );
+          document.getElementById("data").rows["gyroZ"].innerHTML = dataRow(
+            "Gyro Z",
+            data[index].gyroZ,
+            " "
+          );
+
+          if (index < 500) {
+            index++;
+          } else {
+            index = 0;
+          }
+        }
+        console.log(
+          "Display: " +
+            theTime.getHours() +
+            ":" +
+            theTime.getMinutes() +
+            ":" +
+            theTime.getSeconds()
+        );
+      }
+    </script>
+  </head>
+  <body>
+    <table>
+      <td><img src="UATspaceLogo.jpg" /></td>
+      <td>
+        <h1>
+          UAT Space Program
+        </h1>
+      </td>
+    </table>
+    <br />
+    <table id="data" width="70%" border="2">
+      <col style="width: 35%;" />
+      <col style="width: 35%;" />
+      <thead>
+        <tr style="font-family: fantasy;"></tr>
+        <th>Data Type</th>
+        <th>Reading</th>
+      </thead>
+      <tbody>
+        <tr id="seconds"></tr>
+        <tr id="latitude"></tr>
+        <tr id="longitude"></tr>
+        <tr id="gpsSensor_alt"></tr>
+        <tr id="bmpSensor_alt"></tr>
+        <tr id="bmpSensor_pres"></tr>
+        <tr id="bmpSensor_temp"></tr>
+        <tr id="digSensor_temp"></tr>
+        <tr id="cssSensor_ecO2"></tr>
+        <tr id="cssSensor_TVOC"></tr>
+        <tr id="UV"></tr>
+        <tr id="accelX"></tr>
+        <tr id="accelY"></tr>
+        <tr id="accelZ"></tr>
+        <tr id="magneticX"></tr>
+        <tr id="magneticY"></tr>
+        <tr id="magneticZ"></tr>
+        <tr id="gyroX"></tr>
+        <tr id="gyroY"></tr>
+        <tr id="gyroZ"></tr>
+      </tbody>
+    </table>
+    <br />
+    <div id="time"></div>
+    <button id="startButton" onclick="start();" class="button">Start</button>
+    <button id="stopButton" onclick="stop();" class="button">Stop</button>
+    <br />
+    <br />
+  </body>
+</html>
